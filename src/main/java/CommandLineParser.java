@@ -18,19 +18,10 @@ public class CommandLineParser {
 		connectionState = new ConnectionState();
 		inputHandler = new InputHandler(input,connectionState);		
 		
-		while(true){
-			
-			if(!connectionState.isConnected()){				
-				System.out.println("connect to sign or type help for list of options, or exit to quit");
-				inputHandler.getInput();
-				
-			}
-			else {
-				System.out.println("Enter command or type help for list of commands or exit to quit");
-				inputHandler.getInput();
-				
-			}
-			
+		while(true){			
+							
+			inputHandler.getInput();				
+						
 		}
 		
 	}
