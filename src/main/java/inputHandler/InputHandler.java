@@ -18,16 +18,20 @@ public class InputHandler {
 
 	
 	public void getInput(){
-		String inputString=input.nextLine();
+		
 		if(!connectionState.isConnected()){
-			processUnconnected(inputString);
+			
+			processUnconnected();
 		}
 		else {
-			processConnected(inputString);
+			processConnected();
 		}
 	}
 	
-	private void processUnconnected(String inputString){
+	private void processUnconnected(){
+		System.out.println("Connect to sign or type help for list of options, or exit to quit");
+		String inputString=input.nextLine();
+		
 		if(inputString.equals("exit")){
 			System.exit(0);
 		}
@@ -36,7 +40,10 @@ public class InputHandler {
 		}
 	}
 	
-	private void processConnected(String inputString){
+	private void processConnected(){
+		System.out.println("Enter command or type help for list of commands or exit to quit");
+		String inputString=input.nextLine();
+		
 		if(inputString.equals("exit")){
 			System.exit(0);
 		}
