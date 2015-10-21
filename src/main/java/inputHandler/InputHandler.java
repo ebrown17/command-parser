@@ -1,18 +1,23 @@
 package inputHandler;
 
+import java.util.Map;
 import java.util.Scanner;
 
-import connection.ConnectionState;
+import state.State;
+
+import command.Command;
+import command.CommandList;
 
 public class InputHandler {
 	
-	private ConnectionState connectionState;
+	//private ConnectionState connectionState;
 	private Scanner input;
+	private Map<String,Command> commands = CommandList.INSTANCE.getCommandList();
+	private State connectionState = State.INSTANCE;
 	
-	
-	public InputHandler(Scanner input, ConnectionState connectionState){		
+	public InputHandler(Scanner input){		
 		this.input=input;
-		this.connectionState=connectionState;
+		
 		
 	}
 
@@ -33,10 +38,17 @@ public class InputHandler {
 		String inputString=input.nextLine();
 		
 		if(inputString.equals("exit")){
-			System.exit(0);
+			commands.get(inputString.toUpperCase()).doCommand();
+			
+		}
+		if(inputString.equals("help")){			
+			commands.get(inputString.toUpperCase()).doCommand();			
+			
 		}
 		if(inputString.equals("connect")){
-			connectionState.setConnected(true);
+			commands.get(inputString.toUpperCase()).doCommand();
+			
+			connectionState.connected();
 		}
 	}
 	
@@ -45,10 +57,11 @@ public class InputHandler {
 		String inputString=input.nextLine();
 		
 		if(inputString.equals("exit")){
-			System.exit(0);
+			commands.get(inputString.toUpperCase()).doCommand();
 		}
 		if(inputString.equals("disconnect")){
-			connectionState.setConnected(false);
+			// need to add disconnect command
+			connectionState.disconnected();
 		}
 	}
 	
