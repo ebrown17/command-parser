@@ -12,7 +12,9 @@ public class InputHandler {
 	
 	//private ConnectionState connectionState;
 	private Scanner input;
-	private Map<String,Command> commands = CommandList.INSTANCE.getCommandList();
+	
+	CommandList commandList = CommandList.INSTANCE;
+	private Map<String,Command> commands = commandList.getCommandList();
 	private State connectionState = State.INSTANCE;
 	
 	public InputHandler(Scanner input){		
@@ -24,44 +26,34 @@ public class InputHandler {
 	
 	public void getInput(){
 		
-		if(!connectionState.isConnected()){
-			
-			processUnconnected();
+		if(connectionState.isConnected()){
+			processConnected();
 		}
 		else {
-			processConnected();
+			processUnconnected();
 		}
 	}
 	
 	private void processUnconnected(){
 		System.out.println("Connect to sign or type help for list of options, or exit to quit");
-		String inputString=input.nextLine();
+		String inputString=input.nextLine().toUpperCase();
 		
-		if(inputString.equals("exit")){
-			commands.get(inputString.toUpperCase()).doCommand();
-			
+		if(commandList.checkCommandList(inputString)){
+			commandList.getCommandList().get(inputString).doCommand();		
+		} else {
+			commands.get("HELP").doCommand();
 		}
-		if(inputString.equals("help")){			
-			commands.get(inputString.toUpperCase()).doCommand();			
-			
-		}
-		if(inputString.equals("connect")){
-			commands.get(inputString.toUpperCase()).doCommand();
-			
-			connectionState.connected();
-		}
+		
 	}
 	
 	private void processConnected(){
 		System.out.println("Enter command or type help for list of commands or exit to quit");
-		String inputString=input.nextLine();
+		String inputString=input.nextLine().toUpperCase();
 		
-		if(inputString.equals("exit")){
-			commands.get(inputString.toUpperCase()).doCommand();
-		}
-		if(inputString.equals("disconnect")){
-			// need to add disconnect command
-			connectionState.disconnected();
+		if(commandList.checkCommandList(inputString)){
+			commandList.getCommandList().get(inputString).doCommand();		
+		} else {
+			commands.get("HELP").doCommand();
 		}
 	}
 	
