@@ -5,7 +5,6 @@ import command.CommandAction;
 import command.CommandList;
 
 public class HelpCommand extends Command{	
-
 	
 	public HelpCommand(){
 		commandAction = new Help();
