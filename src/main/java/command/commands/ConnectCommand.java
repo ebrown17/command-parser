@@ -19,7 +19,7 @@ public class ConnectCommand extends Command {
 		public void executeCommand() {
 			// add connection logic
 			System.out.println("CONNECTING");
-			connectionState.connected();
+			connectionState.connect();
 		}
 		
 	}

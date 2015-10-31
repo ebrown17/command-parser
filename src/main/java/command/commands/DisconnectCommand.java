@@ -20,7 +20,7 @@ public class DisconnectCommand extends Command {
 		public void executeCommand() {
 			// add connection logic
 			System.out.println("DISCONNECTING");
-			connectionState.disconnected();
+			connectionState.disconnect();
 		}
 		
 	}
