@@ -17,7 +17,7 @@ public class HelpCommand extends Command{
 		public void executeCommand() {		
 			
 			System.out.println("Command list: ");
-			for(String s : CommandList.INSTANCE.getCommandList().keySet()){
+			for(String s : CommandList.INSTANCE.commandList().keySet()){
 				System.out.println(s);
 			}
 			
