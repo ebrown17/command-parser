@@ -1,6 +1,5 @@
 package inputHandler;
 
-import java.util.Map;
 import java.util.Scanner;
 
 import state.State;
@@ -8,42 +7,29 @@ import state.State;
 import command.Command;
 import command.CommandList;
 
-public class InputHandler {
+public class InputHandler {	
 	
-	//private ConnectionState connectionState;
-	private Scanner input;
-	
-	CommandList commandList = CommandList.INSTANCE;
-	private Map<String,Command> commands = commandList.getCommandList();
+	private Scanner input;	
+	private CommandList commandList = CommandList.INSTANCE;
 	private State connectionState = State.INSTANCE;
+	private Command currentCommand;
 	
 	public InputHandler(Scanner input){		
 		this.input=input;		
-		
 	}
-
 	
 	public void getInput(){		
 		processInput();
 	}
 	
-	private void processInput(){
-		
-		System.out.println(connectionState.getStateText());
-		
+	private void processInput(){		
+		System.out.println(connectionState.getStateText());		
 		if(input.hasNext()){
-			String inputString=input.nextLine().toUpperCase();
-			
-			if(commandList.checkCommandList(inputString)){
-				commandList.getCommandList().get(inputString).doCommand();		
-			} else {
-				commands.get("HELP").doCommand();
-			}
+			String inputString=input.nextLine().toUpperCase();			
+			currentCommand = commandList.processCommand(inputString);
+			currentCommand.execute();			
 		} else {
-			commands.get("EXIT").doCommand();
+			input.close();
 		}
 	}
-	
-	
-	
 }

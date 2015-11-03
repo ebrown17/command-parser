@@ -33,9 +33,8 @@ public enum State {
 	}
 	
 		
-	public boolean isConnected(){
-		
-		return state == States.CONNECTED ? true : false;
+	public boolean isConnected(){		
+		return state == States.CONNECTED ;
 	}
 	
 	public void connect(){
