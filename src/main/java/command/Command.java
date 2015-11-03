@@ -8,7 +8,7 @@ public abstract class Command {
 		
 	}	
 	
-	public void doCommand(){
+	public void execute(){
 		commandAction.executeCommand();
 	}
 }
